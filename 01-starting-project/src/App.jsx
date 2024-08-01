@@ -1,23 +1,70 @@
-function getRandomNum(max) {
-  return Math.floor(Math.random() * max);
-}
+import componentImg from "./assets/components.png";
+import { CORE_CONCEPTS } from "./data";
+import Header from "./components/Header/Header.jsx";
+import CoreConcept from "./components/CoreConcept.jsx";
+import TabButton from "./components/TabButton.jsx";
+import { useState } from "react";
+import { EXAMPLES } from "./data-with-examples.js";
 
-const wordlist = ["Core", "New", "Good"];
- 
 function App() {
-  const desc = wordlist[getRandomNum(3)];
+  const [selectedTopic , setSelectedTopic] = useState('')
+  function handleSelect(selectedButton) {
+    setSelectedTopic(selectedButton)
+    console.log(selectedTopic);
+  }
+
+  console.log('App Component Executing')
+
+  let tabContent =  <p>Please Select Topic.</p> ;
+  if (selectedTopic) {
+    tabContent = (
+      <div id="tab-content">
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>{EXAMPLES[selectedTopic].code}</code>
+        </pre>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <header>
-        <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
-        <h1>React Essentials</h1>
-        <p>
-          {desc} Fundamental React concepts you will need for almost any app you
-          are going to build!
-        </p>
-      </header>
+      <Header />
       <main>
-        <h2>Time to get started!</h2>
+        <section id="core-concepts">
+          <h2>Core Concepts</h2>
+          <ul>
+            <CoreConcept
+              title={CORE_CONCEPTS[0].title}
+              description={CORE_CONCEPTS[0].description}
+              image={CORE_CONCEPTS[0].image}
+            />
+            <CoreConcept {...CORE_CONCEPTS[1]} />
+            <CoreConcept
+              title={CORE_CONCEPTS[2].title}
+              description={CORE_CONCEPTS[2].description}
+              image={CORE_CONCEPTS[2].image}
+            />
+            <CoreConcept
+              title={CORE_CONCEPTS[3].title}
+              description={CORE_CONCEPTS[3].description}
+              image={CORE_CONCEPTS[3].image}
+            />
+          </ul>
+        </section>
+        <section id="examples">
+          <h2>Example</h2>
+          <menu>
+            <TabButton onSelect={() => handleSelect("components")}>
+              Components
+            </TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
+          </menu>
+          {tabContent}
+        </section>
       </main>
     </div>
   );
