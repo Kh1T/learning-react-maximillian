@@ -23,7 +23,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import HomePage from "./pages/Home.js";
-import EventsPage from "./pages/Events.js";
+import EventsPage, { loader } from "./pages/Events.js";
 import EventDetailPage from "./pages/EventDetail.js";
 import NewEventPage from "./pages/NewEvent.js";
 import EditEventPage from "./pages/EditEvent.js";
@@ -43,23 +43,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsPage />,
-            loader: async () => {
-              try {
-                const response = await fetch("http://localhost:8080/events");
-                console.log(response)
-                if (!response.ok) {
-                  console.log("Fetching events failed.");
-                  throw new Error("Fetching events failed.");
-                } else {
-                  const resData = await response.json();
-                  console.log(resData);
-                  return resData.events;
-                }
-              } catch (error) {
-                console.log(error);
-                return [];
-              }
-            },
+            loader: loader,
           },
           { path: ":id", element: <EventDetailPage /> },
           { path: "new", element: <NewEventPage /> },
