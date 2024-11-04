@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import EventItem from "../components/EventItem";
+
+
+
 import { DUMMY_EVENTS } from "../dummy_events";
 const EventDetailPage = ({ event }) => {
   const { id } = useParams();
