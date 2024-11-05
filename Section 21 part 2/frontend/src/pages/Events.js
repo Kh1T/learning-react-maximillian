@@ -6,7 +6,7 @@ function EventsPage() {
 
   return (
     <>
-      <EventsList events={events} />
+      <EventsList events={events.events} />
     </>
   );
 }
@@ -16,10 +16,11 @@ export default EventsPage;
 export async function loader() {
   const response = await fetch("http://localhost:8080/events");
   if (!response.ok) {
-    return { isError: true, message: "Fetching events failed." };
-    // throw new Error("Fetching events failed.");
+    // return { isError: true, message: "Fetching events failed." };
+    throw new Response(JSON.stringify({ message: "Fetching events failed." }), {
+      status: 404,
+    });
   } else {
-    const resData = await response.json();
-    return resData.events;
+    return response;
   }
 }
