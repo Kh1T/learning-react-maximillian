@@ -3,7 +3,7 @@ import EventForm from "../components/EventForm";
 const NewEventPage = () => {
   return (
     <>
-      <EventForm />
+      <EventForm method="POST" />
     </>
   );
 };
@@ -25,6 +25,10 @@ export async function action({ request }) {
     },
     body: JSON.stringify(eventData),
   });
+
+  if (response.status === 422) {
+    return response;
+  }
 
   if (!response.ok) {
     throw json({ message: "Could not add event." }, { status: 500 });
