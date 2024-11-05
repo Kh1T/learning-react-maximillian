@@ -1,18 +1,11 @@
-import classes from './EventItem.module.css';
+import classes from "./EventItem.module.css";
+import { Link } from "react-router-dom";
 
-function EventItem({ event
-   = {
-  id: '1',
-  title: 'Sample Event',
-  description: 'Some sample description',
-  date: '2021-05-12',
-  image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-} 
-}) {
+function EventItem({ event }) {
   function startDeleteHandler() {
     // ...
-    
-    console.log('Delete');
+
+    console.log("Delete");
   }
 
   return (
@@ -22,7 +15,7 @@ function EventItem({ event
       <time>{event.date}</time>
       <p>{event.description}</p>
       <menu className={classes.actions}>
-        <a href={`/events/${event.id}/edit`}>Edit</a>
+        <Link to={"edit"}>Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
       </menu>
     </article>
