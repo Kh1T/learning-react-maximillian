@@ -1,0 +1,9 @@
+# node
+node_modules
+
+# DS
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
