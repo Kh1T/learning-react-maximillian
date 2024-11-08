@@ -7,7 +7,16 @@ export default function Home() {
       <h1>Welcome to this NextJS Course!</h1>
       <p>🔥 Let&apos;s get started! 🔥</p>
       <p>
-        <Link href="/about">About Us</Link>{" "}
+        <Link href="/meals">Meals</Link>
+      </p>
+      <p>
+        <Link href="/meals/share">Share meal</Link>
+      </p>
+      <p>
+        <Link href="/community">Community</Link>
+      </p>
+      <p>
+        <Link href="/about">About Us</Link>
       </p>
     </main>
   );
